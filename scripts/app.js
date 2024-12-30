@@ -15,7 +15,7 @@ function demanderPermissionNotification() {
             console.log(`Permission existante : ${Notification.permission}`);
         }
     } else {
-        console.log("Les notifications ne sont pas supportées par ce navigateur.");
+        alert("Les notifications ne sont pas supportées par ce navigateur.");
     }
 }
 
@@ -23,11 +23,11 @@ function demanderPermissionNotification() {
 function envoyerNotification(message) {
     if ('Notification' in window && Notification.permission === 'granted') {
         new Notification(message, {
-            icon: 'icon.png', // Chemin vers une icône (optionnel)
+            icon: './images/Logo_PWA-192.png', // Chemin vers une icône (optionnel)
             body: "Cliquez pour en savoir plus !", // Sous-titre
         });
     } else {
-        console.log("Les notifications ne sont pas autorisées.");
+        alert("Les notifications ne sont pas autorisées.");
     }
 }
 
