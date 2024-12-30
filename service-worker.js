@@ -65,29 +65,46 @@ self.addEventListener("activate", (event) => {
   self.clients.claim(); // Contrôler immédiatement les pages
 });
 
+
+
+
+
 // Évènement de fetch (récupération des ressources)
 self.addEventListener("fetch", (event) => {
-  console.log(`[SERVICE WORKER] : ${CACHE_VERSION} Interception de ${event.request.url}`);
+  console.log(`[SERVICE WORKER] : Interception de ${event.request.url}`);
 
   event.respondWith(
     (async () => {
       const cache = await caches.open(STATIC_CACHE);
-
-      // Vérifier si la ressource est dans le cache
       const cachedResponse = await cache.match(event.request);
-      const fetchPromise = fetch(event.request)
-        .then((networkResponse) => {
-          // Mettre à jour le cache avec la réponse réseau
+
+      // Si la ressource est en cache, retourne-la immédiatement
+      if (cachedResponse) {
+        // Retourner la réponse en cache immédiatement, tout en récupérant une nouvelle version en arrière-plan
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
+          // Mettre à jour le cache en arrière-plan avec la nouvelle version de la ressource
           cache.put(event.request, networkResponse.clone());
           return networkResponse;
-        })
-        .catch((error) => {
-          console.log(`[SERVICE WORKER] : ${CACHE_VERSION} Erreur réseau pour ${event.request.url}`);
-          return cachedResponse; // Utiliser la réponse en cache en cas d'échec
+        }).catch(() => {
+          // Si une erreur de réseau survient, retourner la page offline.html si elle est dans le cache
+          return cache.match(`${basePath}offline.html`);
         });
 
-      // Retourner la réponse en cache immédiatement, tout en récupérant une nouvelle version en arrière-plan
-      return cachedResponse || fetchPromise;
+        // Retourner la réponse en cache immédiatement et récupérer une nouvelle version en arrière-plan
+        return cachedResponse || fetchPromise;
+      }
+
+      // Si la ressource n'est pas dans le cache et qu'il n'y a pas de réseau, retourner offline.html
+      try {
+        const networkResponse = await fetch(event.request);
+        // Si la requête réseau réussit, on met à jour le cache
+        cache.put(event.request, networkResponse.clone());
+        return networkResponse;
+      } catch (error) {
+        console.log(`[SERVICE WORKER] : Erreur réseau pour ${event.request.url}`);
+        // En cas d'échec, retourner la page offline.html
+        return cache.match(`${basePath}offline.html`);
+      }
     })()
   );
 });
