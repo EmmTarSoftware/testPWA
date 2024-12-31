@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (registration && Notification.permission === 'granted') {
                     registration.showNotification("Notification", {
                         body: message,
-                        icon: "/icon.png",
-                        badge: "/badge.png"
+                        icon: "./images/Icon-No-Network.webp",
+                        badge: "./images/Logo_PWA-192.png"
                     });
                 } else {
                     console.warn("Aucun Service Worker enregistré ou permission refusée.");
@@ -51,6 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Exemple : envoyer une notification lorsque l'utilisateur clique sur un bouton
     document.getElementById('testNotification').addEventListener('click', () => {
-        afficherNotification("Ceci est une notification de test !");
+        afficherNotification("TOMATE !");
     });
 });
