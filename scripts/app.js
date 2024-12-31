@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (registration && Notification.permission === 'granted') {
                     registration.showNotification("Notification", {
                         body: message,
-                        icon: "./images/Icon-No-Network.webp",
-                        badge: "./images/Logo_PWA-192.png"
+                        icon: "./images/Test-PWA-Logo.ico",
+                        badge: "./imagesLogo_PWA-192.png"
                     });
                 } else {
                     console.warn("Aucun Service Worker enregistré ou permission refusée.");

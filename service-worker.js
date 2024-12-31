@@ -121,7 +121,8 @@ self.addEventListener("fetch", (event) => {
 self.addEventListener('push', function(event) {
   const options = {
       body: event.data ? event.data.text() : 'Notification par défaut',
-      icon: `${basePath}images/Logo_PWA-192.png`,
+      icon: "",
+      badge: ""
   };
 
   event.waitUntil(
