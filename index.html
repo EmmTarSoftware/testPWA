@@ -9,11 +9,13 @@
     <title>test PWA</title>
 
     <script>
-        window.addEventListener('load',()=>{
-            if ("serviceWorker" in navigator){
-                navigator.serviceWorker.register('service-worker.js');
-            }
-        })
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => console.log("Service Worker enregistré :", registration))
+        .catch(err => console.error("Erreur lors de l'enregistrement du Service Worker :", err));
+}
+
     </script>
 </head>
 <body>
@@ -29,7 +31,7 @@
 
 
     <div>
-        <button onclick="onTestNotify()">test</button>
+        <button id="testNotification">Tester une notification</button>
     </div>
     
 
