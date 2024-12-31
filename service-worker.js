@@ -5,7 +5,7 @@ const basePath = serviceWorkerUrl.replace(/service-worker\.js$/, '');
 console.log(`[SERVICE WORKER] : BasePath = ${basePath}`);
 
 // Nom de la version du cache
-const CACHE_VERSION = "V23";
+const CACHE_VERSION = "V24";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 
 // Fichiers à mettre en cache
