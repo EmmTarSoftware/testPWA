@@ -12,9 +12,9 @@ if ('serviceWorker' in navigator) {
 
 
 // Gestion des éléments DOM
-let pMobileNotifyStatusRef = document.getElementById("pMobileNotifyStatus");
-let rewardsKeyArrayToNotifyCue = [];//tableau vidé par la boucle de notification au fur et à mesure
-
+let pMobileNotifyStatusRef = document.getElementById("pMobileNotifyStatus"),
+    rewardsKeyArrayToNotifyCue = [],//tableau vidé par la boucle de notification au fur et à mesure
+    isNotifyInProgress = false; // pour ne pas lancer la boucle en doublon si traitement en cours
 
 // Vérifie si le navigateur supporte les notifications
 const isNotificationSupported = () => 'Notification' in window;
@@ -70,8 +70,15 @@ function onReceiveNotifyMobileEvent(rewardsKeysArray) {
         // Ajout des nouvelles notifications dans la file d'attente
         rewardsKeyArrayToNotifyCue.push(...rewardsKeysArray);
 
-        // Lancement de la boucle de traitement
-        onTraiteMobileNotify();
+        // Ne lance la boucle de traitement que si elle n'est pas encours
+        // Car sinon juste le fait d'alimenter l'arret ci-dessus suffit à la faire continuer son traitement
+        if (!isNotifyInProgress) {
+            // Lancement de la boucle de traitement
+            console.log(" [NOTIFY] [MOBILE] Lancement de la boucle de traitement. Activation du boolean");
+            isNotifyInProgress = true;
+            onTraiteMobileNotify(); 
+        }
+        
 
     } else if (Notification.permission === 'denied') {
         console.log(" [NOTIFY] [MOBILE] Aucune notification mobile");
@@ -93,6 +100,8 @@ const eventFirstMobileNotify = async (rewardsKeysArray) => {
     if (permission === 'granted') {
         // Ajout des nouvelles notifications dans la file d'attente
         rewardsKeyArrayToNotifyCue.push(...rewardsKeysArray);
+        console.log(" [NOTIFY] [MOBILE] Lancement de la boucle de traitement. Activation du boolean");
+        isNotifyInProgress = true;
         onTraiteMobileNotify();
     }
 };
@@ -117,7 +126,8 @@ function onTraiteMobileNotify() {
         if (rewardsKeyArrayToNotifyCue.length > 0) {            
             onTraiteMobileNotify();
         } else {
-            console.log("[NOTIFY] [MOBILE] fin de traitement ");
+            console.log("[NOTIFY] [MOBILE] fin de traitement. Libération du boolean");
+            isNotifyInProgress = false;
         }
     }, 2000);
 }
