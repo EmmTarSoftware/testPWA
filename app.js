@@ -12,36 +12,24 @@ if ('serviceWorker' in navigator) {
 
 
 // Gestion des éléments DOM
-const addSessionButton = document.getElementById('addSession');
-const testNotificationButton = document.getElementById('testNotification');
-const statusDisplay = document.getElementById('status');
-
-// Variables pour suivre les sessions et l'état des notifications
-let sessionCount = 0;
-
+let pMobileNotifyStatusRef = document.getElementById("pMobileNotifyStatus");
 
 // Vérifie si le navigateur supporte les notifications
 const isNotificationSupported = () => 'Notification' in window;
 
 
-// Met à jour l'état affiché à l'utilisateur
-const updateStatusDisplay = () => {
-    const permission = Notification.permission;
 
+// Met à jour l'état affiché à l'utilisateur
+function updateStatusDisplay (){
+    const permission = Notification.permission;
     if (permission === 'granted') {
-        statusDisplay.textContent = 'Notifications : Activées';
+        pMobileNotifyStatusRef.innerHTML = 'Notifications : Activées';
     } else if (permission === 'denied') {
-        statusDisplay.textContent = 'Notifications : Refusées';
+        pMobileNotifyStatusRef.innerHTML = 'Notifications : Refusées';
     } else {
-        statusDisplay.textContent = 'Notifications : Non configurées';
+        pMobileNotifyStatusRef.innerHTML = 'Notifications : Non configurées';
     }
 };
-
-
-
-
-
-
 
 
 
@@ -73,6 +61,8 @@ function sendRewardMobileNotify (title, body,badgeReward) {
     }
 };
 
+
+
 // première notification mobile
 const eventFirstMobileNotify = async (rewardKey) => {
 
@@ -94,10 +84,13 @@ const eventMobileNotify = (rewardKey) => {
     }
 };
 
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
+
+
+
+// Verification des notifications mobile au démarrage
+function onInitMobileNotify() {
     if (!isNotificationSupported()) {
-        statusDisplay.textContent = 'Notifications : Non supportées par ce navigateur';
+        pMobileNotifyStatusRef.innerHTML = 'Notifications : Non supportées par ce navigateur';
         return;
     }
 
@@ -108,9 +101,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateStatusDisplay();
 
-});
-
-
-function test() {
-    eventMobileNotify()
 }
+
+
+
+
+
+
+
+
+
+
+onInitMobileNotify();
