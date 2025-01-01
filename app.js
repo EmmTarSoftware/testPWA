@@ -5,29 +5,60 @@ if ('serviceWorker' in navigator) {
         .catch(err => console.error('Erreur lors de l\'enregistrement du Service Worker :', err));
 }
 
-// Vérifier l'état des notifications
-const notificationStatus = document.getElementById('notificationStatus');
-const updateNotificationStatus = () => {
-    notificationStatus.checked = Notification.permission === 'granted';
-};
-updateNotificationStatus();
+// Gestion des éléments DOM
+const toggleNotifications = document.getElementById('toggleNotifications');
+const requestPermissionButton = document.getElementById('requestPermission');
+const testNotificationButton = document.getElementById('testNotification');
 
-// Bouton pour demander la permission des notifications
-document.getElementById('requestPermission').addEventListener('click', () => {
-    Notification.requestPermission().then(updateNotificationStatus);
+// Vérifie et met à jour l'état de la checkbox
+const updateToggleState = () => {
+    if (Notification.permission === 'granted') {
+        toggleNotifications.disabled = false;
+        const notificationsEnabled = localStorage.getItem('notificationsEnabled') === 'true';
+        toggleNotifications.checked = notificationsEnabled;
+    } else {
+        toggleNotifications.disabled = true;
+        toggleNotifications.checked = false;
+    }
+};
+
+// Demander la permission
+requestPermissionButton.addEventListener('click', async () => {
+    const permission = await Notification.requestPermission(); // Attendre que la permission soit définie
+    if (permission === 'granted') {
+        console.log('Notifications autorisées');
+    } else {
+        console.log('Notifications refusées');
+    }
+    updateToggleState(); // Mettre à jour l'état après la demande
 });
 
-// Bouton pour tester l'envoi d'une notification
-document.getElementById('testNotification').addEventListener('click', () => {
-    if (Notification.permission === 'granted' && navigator.serviceWorker) {
+// Activer ou désactiver les notifications
+toggleNotifications.addEventListener('change', () => {
+    localStorage.setItem('notificationsEnabled', toggleNotifications.checked);
+});
+
+// Test d'envoi de notification
+testNotificationButton.addEventListener('click', () => {
+    const notificationsEnabled = localStorage.getItem('notificationsEnabled') === 'true';
+
+    if (Notification.permission === 'granted' && notificationsEnabled) {
         navigator.serviceWorker.ready.then(swRegistration => {
             swRegistration.showNotification('Test Notification', {
-                body: 'Ceci est une notification de test.',
-                icon: 'logo-test.png', // Assurez-vous d'avoir une icône ici
+                body: 'Les notifications sont activées.',
+                icon: 'icon.png',
                 vibrate: [200, 100, 200],
             });
         });
+    } else if (Notification.permission !== 'granted') {
+        alert('Vous devez autoriser les notifications pour les activer.');
     } else {
-        alert('Les notifications ne sont pas autorisées.');
+        alert('Les notifications sont désactivées.');
     }
+});
+
+// Initialisation lors du chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+    // Vérifie l'état des autorisations au chargement
+    updateToggleState();
 });
