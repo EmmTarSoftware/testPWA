@@ -63,8 +63,9 @@ function sendRewardMobileNotify (title, body,badge) {
     if (Notification.permission === 'granted') {
         navigator.serviceWorker.ready.then(swRegistration => {
             swRegistration.showNotification(title, {
+                icon: "Logo_MSS-192.png",
                 body: body,
-                icon: badge,
+                image : badge,
                 vibrate: [200, 100, 200],
             });
         });
@@ -79,14 +80,14 @@ const eventFirstMobileNotify = async (rewardKey) => {
     // Première récompense
     const permission = await requestNotificationPermission();
     if (permission === 'granted') {
-        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject[rewardKey].title,allRewardsObject[rewardKey].imgRef);
+        sendRewardMobileNotify('Récompense :', allRewardsObject[rewardKey].title,allRewardsObject[rewardKey].imgRef);
     }
 };
 
 // Test manuel des notifications
 const eventMobileNotify = (rewardKey) => {
     if (Notification.permission === 'granted') {
-        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject[rewardKey].title,allRewardsObject[rewardKey].imgRef);
+        sendRewardMobileNotify('Récompense :', allRewardsObject[rewardKey].title,allRewardsObject[rewardKey].imgRef);
     } else {
         console.log("Notification mobile non active !");
     }
