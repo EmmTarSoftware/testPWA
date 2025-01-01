@@ -23,7 +23,7 @@ document.getElementById('testNotification').addEventListener('click', () => {
         navigator.serviceWorker.ready.then(swRegistration => {
             swRegistration.showNotification('Test Notification', {
                 body: 'Ceci est une notification de test.',
-                icon: 'icon.png', // Assurez-vous d'avoir une icône ici
+                icon: 'logo-test.png', // Assurez-vous d'avoir une icône ici
                 vibrate: [200, 100, 200],
             });
         });
