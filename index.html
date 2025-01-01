@@ -1,26 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Notifications</title>
+    <title>Notifications Sportives</title>
 </head>
 <body>
-    <h1>Gestion des Notifications</h1>
-    <button id="requestPermission">Autoriser les notifications</button>
-    <label>
-        <input type="checkbox" id="toggleNotifications" disabled>
-        Notifications activées
-    </label>
-    <br>
-    <p>
-        <button id="testNotification">Test Notification</button>
-    </p>
+    <h1>Suivi de vos activités sportives</h1>
+    <button onclick="eventFirstMobileNotify()">Première notification</button>
+    <button onclick="eventMobileNotify()">Tester Notification</button>
+    <p id="status">Notifications : Vérification en cours...</p>
 
-        <p>
-            0.1.2
-        </p>
-
+    <script src="rewards.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

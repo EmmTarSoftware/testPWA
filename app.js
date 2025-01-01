@@ -3,62 +3,112 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log('Service Worker enregistré avec succès.'))
         .catch(err => console.error('Erreur lors de l\'enregistrement du Service Worker :', err));
+} else {
+    console.error('Les Service Workers ne sont pas supportés par ce navigateur.');
 }
 
-// Gestion des éléments DOM
-const toggleNotifications = document.getElementById('toggleNotifications');
-const requestPermissionButton = document.getElementById('requestPermission');
-const testNotificationButton = document.getElementById('testNotification');
 
-// Vérifie et met à jour l'état de la checkbox
-const updateToggleState = () => {
-    if (Notification.permission === 'granted') {
-        toggleNotifications.disabled = false;
-        const notificationsEnabled = localStorage.getItem('notificationsEnabled') === 'true';
-        toggleNotifications.checked = notificationsEnabled;
+
+
+
+// Gestion des éléments DOM
+const addSessionButton = document.getElementById('addSession');
+const testNotificationButton = document.getElementById('testNotification');
+const statusDisplay = document.getElementById('status');
+
+// Variables pour suivre les sessions et l'état des notifications
+let sessionCount = 0;
+
+
+// Vérifie si le navigateur supporte les notifications
+const isNotificationSupported = () => 'Notification' in window;
+
+
+// Met à jour l'état affiché à l'utilisateur
+const updateStatusDisplay = () => {
+    const permission = Notification.permission;
+
+    if (permission === 'granted') {
+        statusDisplay.textContent = 'Notifications : Activées';
+    } else if (permission === 'denied') {
+        statusDisplay.textContent = 'Notifications : Refusées';
     } else {
-        toggleNotifications.disabled = true;
-        toggleNotifications.checked = false;
+        statusDisplay.textContent = 'Notifications : Non configurées';
     }
 };
 
-// Demander la permission
-requestPermissionButton.addEventListener('click', async () => {
-    const permission = await Notification.requestPermission(); // Attendre que la permission soit définie
-    if (permission === 'granted') {
-        console.log('Notifications autorisées');
-    } else {
-        console.log('Notifications refusées');
+
+
+
+
+
+
+
+
+
+// Demande l'autorisation pour les notifications
+const requestNotificationPermission = async () => {
+    if (Notification.permission === 'default') {
+        const permission = await Notification.requestPermission();
+        localStorage.setItem('MSS_notifyPermission', permission); // Mémorise la décision
+        updateStatusDisplay();
+        return permission;
     }
-    updateToggleState(); // Mettre à jour l'état après la demande
-});
+    return Notification.permission;
+};
 
-// Activer ou désactiver les notifications
-toggleNotifications.addEventListener('change', () => {
-    localStorage.setItem('notificationsEnabled', toggleNotifications.checked);
-});
 
-// Test d'envoi de notification
-testNotificationButton.addEventListener('click', () => {
-    const notificationsEnabled = localStorage.getItem('notificationsEnabled') === 'true';
-
-    if (Notification.permission === 'granted' && notificationsEnabled) {
+// Envoie une notification
+function sendRewardMobileNotify (title, body,badge) {
+    if (Notification.permission === 'granted') {
         navigator.serviceWorker.ready.then(swRegistration => {
-            swRegistration.showNotification('Recompense obtenue !', {
-                body: 'Course à pied LVL 10',
-                icon: 'logo-test.png',
+            swRegistration.showNotification(title, {
+                body: body,
+                icon: badge,
                 vibrate: [200, 100, 200],
             });
         });
-    } else if (Notification.permission !== 'granted') {
-        alert('Vous devez autoriser les notifications pour les activer.');
-    } else {
-        alert('Les notifications sont désactivées.');
     }
+};
+
+// première notification mobile
+const eventFirstMobileNotify = async () => {
+
+    console.log(" [NOTIFY] [MOBILE] première notication. Demande d'autorisation");
+
+    // Première récompense
+    const permission = await requestNotificationPermission();
+    if (permission === 'granted') {
+        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject["BASKETBALL"].title,allRewardsObject["BASKETBALL"].imgRef);
+    }
+};
+
+// Test manuel des notifications
+const eventMobileNotify = () => {
+    if (Notification.permission === 'granted') {
+        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject["KARATE"].title,allRewardsObject["KARATE"].imgRef);
+    } else {
+        console.log("Notification mobile non active !");
+    }
+};
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    if (!isNotificationSupported()) {
+        statusDisplay.textContent = 'Notifications : Non supportées par ce navigateur';
+        return;
+    }
+
+    // Vérifie l'état actuel et met à jour l'affichage
+    const savedPermission = localStorage.getItem('MSS_notifyPermission');
+    if (savedPermission) {
+        Notification.permission = savedPermission; // Pour l'affichage uniquement
+    }
+    updateStatusDisplay();
+
 });
 
-// Initialisation lors du chargement de la page
-document.addEventListener('DOMContentLoaded', () => {
-    // Vérifie l'état des autorisations au chargement
-    updateToggleState();
-});
+
+function test() {
+    eventMobileNotify()
+}
