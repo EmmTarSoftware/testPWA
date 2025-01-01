@@ -3,41 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./images/Test-PWA-Logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./styles/global.css">
-    <link rel="manifest" href="manifest.json">
-    <title>test PWA</title>
-
-    <script>
-
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-        .then(registration => console.log("Service Worker enregistré :", registration))
-        .catch(err => console.error("Erreur lors de l'enregistrement du Service Worker :", err));
-}
-
-    </script>
+    <title>PWA Test Notifications</title>
 </head>
 <body>
+    <h1>Test PWA Notifications</h1>
+    <button id="requestPermission">Autoriser les notifications</button>
+    <label>
+        <input type="checkbox" id="notificationStatus" disabled>
+        Autorisation activée
+    </label>
+    <br>
+    <button id="testNotification">Test Notification</button>
 
-    <div id="divHeader" class="header">
-        <p id="pMenuTitle" class="app-title">
-            TEST PWA
-        </p>
-    </div>
-    <h1>
-        Application en ligne.
-    </h1>
-
-
-    <div>
-        <button id="testNotification">Tester une notification</button>
-    </div>
-    
-
-
-    <p>Release : 0.0.4</p>
-
-    <script src="./scripts/app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
