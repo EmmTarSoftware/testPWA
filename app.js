@@ -44,9 +44,9 @@ testNotificationButton.addEventListener('click', () => {
 
     if (Notification.permission === 'granted' && notificationsEnabled) {
         navigator.serviceWorker.ready.then(swRegistration => {
-            swRegistration.showNotification('Test Notification', {
-                body: 'Les notifications sont activées.',
-                icon: 'icon.png',
+            swRegistration.showNotification('Recompense obtenue !', {
+                body: 'Course à pied LVL 10',
+                icon: 'logo-test.png',
                 vibrate: [200, 100, 200],
             });
         });
