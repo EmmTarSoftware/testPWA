@@ -72,21 +72,21 @@ function sendRewardMobileNotify (title, body,badge) {
 };
 
 // première notification mobile
-const eventFirstMobileNotify = async () => {
+const eventFirstMobileNotify = async (rewardKey) => {
 
     console.log(" [NOTIFY] [MOBILE] première notication. Demande d'autorisation");
 
     // Première récompense
     const permission = await requestNotificationPermission();
     if (permission === 'granted') {
-        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject["BASKETBALL"].title,allRewardsObject["BASKETBALL"].imgRef);
+        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject[rewardKey].title,allRewardsObject[rewardKey].imgRef);
     }
 };
 
 // Test manuel des notifications
-const eventMobileNotify = () => {
+const eventMobileNotify = (rewardKey) => {
     if (Notification.permission === 'granted') {
-        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject["KARATE"].title,allRewardsObject["KARATE"].imgRef);
+        sendRewardMobileNotify('🎉 Recompense :', allRewardsObject[rewardKey].title,allRewardsObject[rewardKey].imgRef);
     } else {
         console.log("Notification mobile non active !");
     }

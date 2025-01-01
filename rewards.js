@@ -1,6 +1,6 @@
 const allRewardsObject = {
     "KARATE": {
-        imgRef: "./Badges/KARATE.png",
+        imgRef: "./Badges/karate.png",
         title: "Passé le cap !",
         text: "Attachez vos ceinturues "
     },
