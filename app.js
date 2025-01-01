@@ -59,13 +59,14 @@ const requestNotificationPermission = async () => {
 
 
 // Envoie une notification
-function sendRewardMobileNotify (title, body,badge) {
+function sendRewardMobileNotify (title, body,badgeReward) {
     if (Notification.permission === 'granted') {
         navigator.serviceWorker.ready.then(swRegistration => {
             swRegistration.showNotification(title, {
+                badge :"notifyBadge48.png",
                 icon: "Logo_MSS-192.png",
                 body: body,
-                image : badge,
+                image : badgeReward,
                 vibrate: [200, 100, 200],
             });
         });
