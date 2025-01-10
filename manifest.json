@@ -1,15 +1,23 @@
 {
     "name": "Application test PWA",
+    "short_name": "Test PWA",
+    "description": "Une application de test pour PWA avec notifications",
     "icons": [
         {
             "src": "logo-test.png",
             "sizes": "192x192",
             "type": "image/png"
+        },
+        {
+            "src": "logo-test512.png",
+            "sizes": "512x512",
+            "type": "image/png"
         }
     ],
     "start_url": "index.html",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#26b570",
-    "short_name": "Test PWA"
+    "orientation": "portrait"
 }
