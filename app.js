@@ -14,7 +14,7 @@ if ('serviceWorker' in navigator) {
 // Gestion des éléments DOM
 let pMobileNotifyStatusRef = document.getElementById("pMobileNotifyStatus"),
     rewardsKeyArrayToNotifyCue = [],//tableau vidé par la boucle de notification au fur et à mesure
-    isNotifyInProgress = false; // pour ne pas lancer la boucle en doublon si traitement en cours
+    isMobileNotifyInProgress = false; // pour ne pas lancer la boucle en doublon si traitement en cours
 
 // Vérifie si le navigateur supporte les notifications
 const isNotificationSupported = () => 'Notification' in window;
@@ -42,19 +42,23 @@ const requestNotificationPermission = async () => {
 
 
 // fonction d'envoie une notification
-function sendRewardMobileNotify (title, body,badgeReward) {
+function sendRewardMobileNotify(title, body, badgeReward) {
     if (Notification.permission === 'granted') {
         navigator.serviceWorker.ready.then(swRegistration => {
             swRegistration.showNotification(title, {
-                badge :"notifyBadge48.png",
+                badge: "notifyBadge48.png",
                 icon: "Logo_MSS-192.png",
                 body: body,
-                image : badgeReward,
+                image: badgeReward,
                 vibrate: [200, 100, 200],
+                actions: [
+                    { action: 'open_app', title: 'Ouvrir l\'application' }
+                ],
+                data: { url: '/' }, // Ajoutez une URL cible
             });
         });
     }
-};
+}
 
 
 // TEST TEST TEST TEST 
@@ -72,16 +76,16 @@ function onReceiveNotifyMobileEvent(rewardsKeysArray) {
 
         // Ne lance la boucle de traitement que si elle n'est pas encours
         // Car sinon juste le fait d'alimenter l'arret ci-dessus suffit à la faire continuer son traitement
-        if (!isNotifyInProgress) {
+        if (!isMobileNotifyInProgress) {
             // Lancement de la boucle de traitement
             console.log(" [NOTIFY] [MOBILE] Lancement de la boucle de traitement. Activation du boolean");
-            isNotifyInProgress = true;
+            isMobileNotifyInProgress = true;
             onTraiteMobileNotify(); 
         }
         
 
     } else if (Notification.permission === 'denied') {
-        console.log(" [NOTIFY] [MOBILE] Aucune notification mobile");
+        console.log(" [NOTIFY] [MOBILE] Notification NON autorisées ! ");
         return
     } else{
         eventFirstMobileNotify(rewardsKeysArray);
@@ -101,7 +105,7 @@ const eventFirstMobileNotify = async (rewardsKeysArray) => {
         // Ajout des nouvelles notifications dans la file d'attente
         rewardsKeyArrayToNotifyCue.push(...rewardsKeysArray);
         console.log(" [NOTIFY] [MOBILE] Lancement de la boucle de traitement. Activation du boolean");
-        isNotifyInProgress = true;
+        isMobileNotifyInProgress = true;
         onTraiteMobileNotify();
     }
 };
@@ -127,7 +131,7 @@ function onTraiteMobileNotify() {
             onTraiteMobileNotify();
         } else {
             console.log("[NOTIFY] [MOBILE] fin de traitement. Libération du boolean");
-            isNotifyInProgress = false;
+            isMobileNotifyInProgress = false;
         }
     }, 2000);
 }
