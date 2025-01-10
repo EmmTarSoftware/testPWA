@@ -41,24 +41,23 @@ const requestNotificationPermission = async () => {
 };
 
 
-// fonction d'envoie une notification
 function sendRewardMobileNotify(title, body, badgeReward) {
     if (Notification.permission === 'granted') {
         navigator.serviceWorker.ready.then(swRegistration => {
             swRegistration.showNotification(title, {
-                badge: "notifyBadge48.png",
                 icon: "Logo_MSS-192.png",
                 body: body,
                 image: badgeReward,
                 vibrate: [200, 100, 200],
                 actions: [
-                    { action: 'open_app', title: 'Ouvrir l\'application' }
+                    { action: 'open_app', title: 'Saucisse' }
                 ],
                 data: { url: '/' }, // Ajoutez une URL cible
             });
         });
     }
 }
+
 
 
 // TEST TEST TEST TEST 
