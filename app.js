@@ -45,15 +45,13 @@ function sendRewardMobileNotify(title, body, badgeReward) {
     if (Notification.permission === 'granted') {
         navigator.serviceWorker.ready.then(swRegistration => {
             swRegistration.showNotification(title, {
+                badge: "notifyBadge48.png",
                 icon: "Logo_MSS-192.png",
                 body: body,
-                image: badgeReward,
                 vibrate: [200, 100, 200],
-                actions: [
-                    { action: 'open_app', title: 'Saucisse' }
-                ],
-                data: { url: '/' }, // Ajoutez une URL cible
-            });
+                requireInteraction: true, // Force l'interaction utilisateur
+                priority: 'high' // Force la priorité (bien que non standard)
+            });            
         });
     }
 }
