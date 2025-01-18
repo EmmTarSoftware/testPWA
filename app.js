@@ -168,7 +168,37 @@ function updateStatusDisplay (){
 
 
 
-
+document.getElementById('shareButton').addEventListener('click', function() {
+    // Vérifier si l'API Web Share est disponible
+    if (navigator.share) {
+        const imageElement = document.getElementById('image');
+        
+        // Créer un objet File pour l'image
+        fetch(imageElement.src)
+            .then(response => response.blob())  // Récupérer l'image sous forme de Blob
+            .then(blob => {
+                const file = new File([blob], "image.png", { type: "image/png" });
+                
+                // Partager l'image
+                navigator.share({
+                    files: [file],  // L'image à partager
+                    title: 'Voici une image à partager',
+                    text: 'Jetez un œil à cette image !',
+                })
+                .then(() => {
+                    console.log('Image partagée avec succès !');
+                })
+                .catch((error) => {
+                    console.error('Erreur de partage : ', error);
+                });
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération de l\'image : ', error);
+            });
+    } else {
+        alert("L'API Web Share n'est pas supportée sur ce navigateur.");
+    }
+});
 
 
 onInitMobileNotify();

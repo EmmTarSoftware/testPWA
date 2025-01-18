@@ -5,20 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest.json">
     <title>Notifications Sportives</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            width: 80%;
+            max-width: 300px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Suivi de vos activités sportives</h1>
+
     <p>
-        <button onclick="test()">Première notification</button>
+        15
     </p>
 
 
-    <p id="pMobileNotifyStatus">Notifications : Vérification en cours...</p>
-
-
-    <p>
-        14
-    </p>
+    <div class="container">
+        <h1>Partager une Image</h1>
+        <img id="image" src="./Badges/Badge-ACTIVITE-NAUTIQUE-B.webp" alt="Image à partager">
+        <br>
+        <button id="shareButton">Partager cette image</button>
+    </div>
     <script src="rewards.js"></script>
     <script src="app.js"></script>
 </body>
