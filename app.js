@@ -229,5 +229,6 @@ async function selectSaveLocation() {
         console.log("Emplacement de sauvegarde défini.");
     } catch (error) {
         console.error("L'utilisateur a annulé la sélection de l'emplacement.", error);
+        alert("erreur",error);
     }
 }
