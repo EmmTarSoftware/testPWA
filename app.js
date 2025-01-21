@@ -201,4 +201,33 @@ document.getElementById('shareButton').addEventListener('click', function() {
 });
 
 
+
+
+
+
 onInitMobileNotify();
+
+
+
+
+
+
+
+
+
+async function selectSaveLocation() {
+    try {
+        autoSaveFile = await window.showSaveFilePicker({
+            suggestedName: `MSS_AutoSave.json`,
+            types: [
+                {
+                    description: "Fichiers JSON",
+                    accept: { "application/json": [".json"] }
+                }
+            ]
+        });
+        console.log("Emplacement de sauvegarde défini.");
+    } catch (error) {
+        console.error("L'utilisateur a annulé la sélection de l'emplacement.", error);
+    }
+}
