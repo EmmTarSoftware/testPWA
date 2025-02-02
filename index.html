@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sélecteur avec Icône</title>
+    <title>Sélecteur Stylisé</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,54 +14,49 @@
             background-color: #f4f4f4;
         }
 
-        .icon-button {
-            font-size: 40px;
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-
-        /* Cacher le select mais il reste fonctionnel */
-        #hiddenSelect {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-        }
-
-        /* Conteneur pour mieux gérer l'interaction */
         .select-container {
             position: relative;
-            display: inline-block;
+            width: 200px;
+        }
+
+        /* Styliser le select pour enlever l'apparence par défaut */
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            appearance: none; /* Supprime le style natif */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+        }
+
+        /* Icône personnalisée */
+        .select-container::after {
+            content: "🔽"; /* Icône de flèche */
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none; /* Empêche de cliquer dessus */
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
     <div class="select-container">
-        <!-- Sélecteur invisible placé au-dessus de l'icône -->
-        <select id="hiddenSelect" onchange="handleSelection(event)">
+        <select id="customSelect" onchange="handleSelection(event)">
             <option value="">Sélectionnez une option</option>
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
         </select>
-
-        <!-- Icône qui déclenche le select -->
-        <button class="icon-button" onclick="openSelect()">🔽</button>
     </div>
 
     <script>
-        function openSelect() {
-            let select = document.getElementById("hiddenSelect");
-            select.style.opacity = "1";  // Rendez-le visible pour le clic
-            select.focus();  // Essaye de lui donner le focus
-            select.click();  // Force l'ouverture
-            setTimeout(() => select.style.opacity = "0", 500);  // Le rend invisible après interaction
-        }
-
         function handleSelection(event) {
             alert("Vous avez sélectionné : " + event.target.value);
         }
