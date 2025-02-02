@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/manifest.json">
-    <title>Notifications Sportives</title>
+    <title>Sélecteur invisible</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,54 +11,50 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
+            background-color: #f4f4f4;
         }
-        .container {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        img {
-            width: 80%;
-            max-width: 300px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
+
+        .icon-button {
+            font-size: 40px;
             cursor: pointer;
-            background-color: #007bff;
-            color: white;
             border: none;
-            border-radius: 5px;
+            background: none;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        /* Cacher le select mais garder son accessibilité */
+        #hiddenSelect {
+            position: absolute;
+            opacity: 0;
+            width: 1px;
+            height: 1px;
         }
     </style>
 </head>
 <body>
 
-    <p>
-        17
-    </p>
+    <!-- Icône qui déclenche le select -->
+    <button class="icon-button" onclick="openSelect()">
+        🔽 <!-- Icône de ton choix -->
+    </button>
 
+    <!-- Sélecteur invisible -->
+    <select id="hiddenSelect" onchange="handleSelection(event)">
+        <option value="">Sélectionnez une option</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+    </select>
 
-    <div class="container">
-        <h1>Partager une Image</h1>
-        <img id="image" src="./Badges/Badge-ACTIVITE-NAUTIQUE-B.webp" alt="Image à partager">
-        <br>
-        <button id="shareButton">Partager cette image</button>
-        <p>
-            <button onclick="selectSaveLocation()">TEST Emplacement</button>
-        </p>
+    <script>
+        function openSelect() {
+            document.getElementById("hiddenSelect").focus();
+            document.getElementById("hiddenSelect").click(); // Pour certains navigateurs
+        }
 
-    </div>
-    <script src="rewards.js"></script>
-    <script src="app.js"></script>
+        function handleSelection(event) {
+            alert("Vous avez sélectionné : " + event.target.value);
+        }
+    </script>
+
 </body>
 </html>
