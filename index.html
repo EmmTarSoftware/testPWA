@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sélecteur invisible</title>
+    <title>Sélecteur avec Icône</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,34 +21,45 @@
             background: none;
         }
 
-        /* Cacher le select mais garder son accessibilité */
+        /* Cacher le select mais il reste fonctionnel */
         #hiddenSelect {
             position: absolute;
             opacity: 0;
-            width: 1px;
-            height: 1px;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        /* Conteneur pour mieux gérer l'interaction */
+        .select-container {
+            position: relative;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
-    <!-- Icône qui déclenche le select -->
-    <button class="icon-button" onclick="openSelect()">
-        🔽 <!-- Icône de ton choix -->
-    </button>
+    <div class="select-container">
+        <!-- Sélecteur invisible placé au-dessus de l'icône -->
+        <select id="hiddenSelect" onchange="handleSelection(event)">
+            <option value="">Sélectionnez une option</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
 
-    <!-- Sélecteur invisible -->
-    <select id="hiddenSelect" onchange="handleSelection(event)">
-        <option value="">Sélectionnez une option</option>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-    </select>
+        <!-- Icône qui déclenche le select -->
+        <button class="icon-button" onclick="openSelect()">🔽</button>
+    </div>
 
     <script>
         function openSelect() {
-            document.getElementById("hiddenSelect").focus();
-            document.getElementById("hiddenSelect").click(); // Pour certains navigateurs
+            let select = document.getElementById("hiddenSelect");
+            select.style.opacity = "1";  // Rendez-le visible pour le clic
+            select.focus();  // Essaye de lui donner le focus
+            select.click();  // Force l'ouverture
+            setTimeout(() => select.style.opacity = "0", 500);  // Le rend invisible après interaction
         }
 
         function handleSelection(event) {
