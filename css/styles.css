@@ -1,0 +1,52 @@
+body, html {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+     justify-content: center;
+    align-items: center;
+}
+div.new-interface {  
+
+    height: 80vh;
+    flex-direction: column;   /* Empile les items verticalement */
+    align-items: flex-start;  /* Aligne les items en haut */
+    flex-grow: 1; /* Remplit l'espace restant entre header et footer */
+    overflow-y: auto; /* Permet le défilement vertical si nécessaire */
+    padding: 10px; /* Ajoute un petit espace intérieur */
+    box-sizing: border-box; /* Inclut les bordures et padding dans les dimensions */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #f4f4f4;
+}
+.generate-session-col-nom { width: 60%; }
+.generate-session-col-objectif { width:100px;}
+.generate-session-col-serie { width:100px; }
+.generate-session-col-couleur { width:200px; }
+
+
+input.generate-session-col-nom{
+    /* background-color: orange; */
+    width: 100%;
+}
+
+input.generate-session-col-objectif{
+    /* background-color: aqua; */
+    width: 100%;
+}
+
+input.generate-session-col-serie{
+    /* background-color: rgb(154, 231, 231); */
+    width: 100%;
+}

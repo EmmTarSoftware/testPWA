@@ -3,64 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sélecteur Stylisé</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Tableau avec Inputs</title>
 
-        .select-container {
-            position: relative;
-            width: 200px;
-        }
-
-        /* Styliser le select pour enlever l'apparence par défaut */
-        select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            background-color: white;
-            appearance: none; /* Supprime le style natif */
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            cursor: pointer;
-        }
-
-        /* Icône personnalisée */
-        .select-container::after {
-            content: "🔽"; /* Icône de flèche */
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            pointer-events: none; /* Empêche de cliquer dessus */
-            font-size: 18px;
-        }
-    </style>
 </head>
 <body>
+    <div class="new-interface">
+        <!-- Titre -->
+         <p>
+            Générer une session.
+         </p>
 
-    <div class="select-container">
-        <select id="customSelect" onchange="handleSelection(event)">
-            <option value="">Sélectionnez une option</option>
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+        <!-- Le selecteur de modèle -->
+        <select name="" id="">
+            <option value="">SEANCES MARDI</option>
+            <option value="">SEANCES JEUDI</option>
         </select>
+
+        <!-- Le tableau de création de session -->
+        <table>
+            <thead>
+                <tr>
+                    <th class="generate-session-col-nom">Nom</th>
+                    <th class="generate-session-col-objectif">Obj</th>
+                    <th class="generate-session-col-serie">Série</th>
+                    <th class="generate-session-col-couleur">Color</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="generate-session-col-nom"><input type="text" class="generate-session-col-nom"></td>
+                    <td class="generate-session-col-objectif"><input type="number" class="generate-session-col-objectif"></td>
+                    <td class="generate-session-col-serie"><input type="number" class="generate-session-col-serie"></td>
+                    <td class="generate-session-col-couleur">
+                        <select>
+                            <option>Bleu</option>
+                            <option>Blanc</option>
+                            <option>Rouge</option>
+                        </select>
+                    </td>
+                </tr> 
+            </tbody>
+        </table>
     </div>
-
-    <script>
-        function handleSelection(event) {
-            alert("Vous avez sélectionné : " + event.target.value);
-        }
-    </script>
-
 </body>
 </html>
