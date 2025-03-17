@@ -33,23 +33,23 @@ th, td {
 th {
     background-color: #f4f4f4;
 }
-.generate-session-col-nom { width: 60%; }
-.generate-session-col-objectif { width:100px;}
-.generate-session-col-serie { width:100px; }
-.generate-session-col-couleur { width:200px; }
+.gen-session-col-nom { width: 60%; }
+.gen-session-col-objectif { width:100px;}
+.gen-session-col-serie { width:100px; }
+.gen-session-col-color { width:200px; }
 
 
-input.generate-session-col-nom{
+input.gen-session-col-nom{
     /* background-color: orange; */
     width: 100%;
 }
 
-input.generate-session-col-series{
+input.gen-session-col-series{
     /* background-color: aqua; */
     width: 100%;
 }
 
-input.generate-session-col-rep{
+input.gen-session-col-rep{
     /* background-color: rgb(154, 231, 231); */
     width: 100%;
 }
