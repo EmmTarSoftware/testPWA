@@ -6,15 +6,42 @@ let counterColor = {
     blue: "#d0ebff",
     violet: "#f7d0ff"
 };
-maxCounter = 2;
+maxCounter = 8;
 
 
+let counterModelList = {
+    "Counter_1": { 
+        type: "Counter", name: "Compteur 1", 
+        initDate:"", 
+        currentSerie: 0, serieTarget :30, repIncrement:5, totalCount:0,
+        displayOrder : 0,
+        color : "white"
+    },
+    "Counter_2": { 
+        type: "Counter", name: "Compteur 2", 
+        initDate:"", 
+        currentSerie: 0, serieTarget :10, repIncrement:2, totalCount:0,
+        displayOrder : 1,
+        color : "red"
+    },
+    "Counter_3": { 
+        type: "Counter", name: "Compteur 3", 
+        initDate:"", 
+        currentSerie: 0, serieTarget :50, repIncrement:10, totalCount:0,
+        displayOrder : 2,
+        color : "blue"
+    }
+}
+
+let counterModelName =[
+    "model1","model2","model3"
+] ;
 // SUPPRIMER AU DESSUS
 
 
 // ---------------------------------- GENERATION LISTE COMPTEUR ---------------------
 
-
+// tout est basé sur maxcounter
 
 
 // Classe d'une ligne de session
@@ -32,13 +59,13 @@ class TableLineSession{
     render(){
         this.element.innerHTML = `
             <td class="gen-session-col-nom">
-                <input type="text" id="inputGenSessionNom_${this.idNumber}" class="gen-session-col-nom">
+                <input type="text" id="inputGenSessionNom_${this.idNumber}" class="gen-session-col-nom" placeholder="Compteur ${this.idNumber}">
             </td>
             <td class="gen-session-col-series">
-                <input type="number" id="inputGenSessionSerie_${this.idNumber}" class="gen-session-col-series">
+                <input type="number" id="inputGenSessionSerie_${this.idNumber}" class="gen-session-col-series" placeholder="0">
             </td>
             <td class="gen-session-col-rep">
-                <input type="number" id="inputGenSessionRep_${this.idNumber}" class="gen-session-col-rep">
+                <input type="number" id="inputGenSessionRep_${this.idNumber}" class="gen-session-col-rep" placeholder="0">
             </td>
             <td class="gen-session-col-color"  id="tdGenSessionChooseColor_${this.idNumber}">
                 <select id="selectGenSessionColor_${this.idNumber}" onchange="onChangeColorInGenSessionTable(${this.idNumber})">
@@ -62,8 +89,9 @@ class TableLineSession{
 
 
 
-// Génération du tableau de création de session
 
+
+// Génération du tableau de création de session
 function onGenerateSessionTable(params) {
     
     // Reférence le parent
@@ -73,13 +101,11 @@ function onGenerateSessionTable(params) {
     parentRef.innerHTML = "";
 
     for (let i = 0; i < maxCounter; i++) {
-        new TableLineSession(parentRef,i);
-        
+        new TableLineSession(parentRef,i); 
     }
-
 }
 
-onGenerateSessionTable();
+
 
 
 // Génération de la session
@@ -119,3 +145,45 @@ function onChangeColorInGenSessionTable(idRef) {
     colorRef = document.getElementById(`selectGenSessionColor_${idRef}`).value;
     tableDataRef.style.backgroundColor = counterColor[colorRef];
 }
+
+
+
+// Génération des options du selecteur de session
+
+
+function onGenerateModelSelectList(params) {
+    // Referencement
+    let parentRef = document.getElementById("selectSessionTableModelName");
+    
+    // Vide les enfants
+    parentRef.innerHTML = "";
+
+    // Insert l'option "Personnalisé"
+    let defaultOption = document.createElement("option");
+        defaultOption.value = "CUSTOM";
+        defaultOption.innerHTML = "Personnalisé";
+
+    parentRef.appendChild(defaultOption);
+
+    // Pour chaque nom de model
+    counterModelName.forEach(e=>{
+
+        // crée une option et l'insere
+        let newOption = document.createElement("option");
+        newOption.value = e;
+        newOption.innerHTML = e;
+
+        parentRef.appendChild(newOption);
+    });
+}
+
+
+
+
+
+
+
+
+
+onGenerateSessionTable();
+onGenerateModelSelectList();
